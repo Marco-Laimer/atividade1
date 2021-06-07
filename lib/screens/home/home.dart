@@ -19,12 +19,16 @@ class _HomeState extends State<Home> {
         ),
         body: Container(
           color: Colors.white,
-          child: ListView.separated(
-            itemBuilder: builder,
-            separatorBuilder: (BuildContext context, int _) {
-              return Divider();
-            },
-            itemCount: listOfProducts.length,
+          child: Column(
+            children: [
+              Image.asset("assets/linha.jpg"),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: builder,
+                  itemCount: listOfProducts.length,
+                ),
+              ),
+            ],
           ),
         ));
   }
@@ -39,70 +43,70 @@ class _HomeState extends State<Home> {
             width: 100,
             fit: BoxFit.cover,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                _product.name,
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                _product.descriptiom,
-                style: TextStyle(
-                  fontSize: 10,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                _product.valor,
-                style: TextStyle(
-                    fontSize: 10,
-                    color: blueTheme,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
+          Expanded(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
-                    _product.valorParcela,
+                    _product.name,
                     style: TextStyle(
-                      fontSize: 10,
-                      color: blueTheme,
+                      fontSize: 12,
                     ),
                   ),
                   SizedBox(
-                    width: 50,
+                    height: 10,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      (_product.isFavorite)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: pinkTheme,
+                  Text(
+                    _product.descriptiom,
+                    style: TextStyle(
+                      fontSize: 10,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _product.isFavorite = !_product.isFavorite;
-                      });
-                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    _product.valor,
+                    style: TextStyle(
+                        fontSize: 10,
+                        color: blueTheme,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        _product.valorParcela,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: blueTheme,
+                        ),
+                      ),
+                    ],
                   )
                 ],
-              )
-            ],
-          )
+              ),
+            ),
+          ),
         ],
+      ),
+      trailing: IconButton(
+        icon: Icon(
+          (_product.isFavorite) ? Icons.favorite : Icons.favorite_border,
+          color: pinkTheme,
+        ),
+        onPressed: () {
+          setState(() {
+            _product.isFavorite = !_product.isFavorite;
+          });
+        },
       ),
     );
   }
